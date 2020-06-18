@@ -2,22 +2,22 @@
   "name": "@snkrs-loop/queue",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "jest -u",
     "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snkrs-loop/routine-query.git"
+    "url": "git+https://github.com/snkrs-loop/queue.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/snkrs-loop/routine-query/issues"
+    "url": "https://github.com/snkrs-loop/queue/issues"
   },
-  "homepage": "https://github.com/snkrs-loop/routine-query#readme",
+  "homepage": "https://github.com/snkrs-loop/queue#readme",
   "dependencies": {
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5"
