@@ -10,7 +10,7 @@ To use the module you need an ``` .npmrc ``` file with the following instruction
 //npm.pkg.github.com/:_authToken=[YOUR_TOKEN]
 ```
 
-After you configure your ``` .npmrc ```, you may want to instal the packadge:
+After you configure your ``` .npmrc ```, you may want to install the packadge:
 ```
 npm install @snkrs-loop/queue
 ```
