@@ -12,13 +12,13 @@
     "url": "git+https://github.com/snkrs-loop/queue.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "João Vitor Scheuermann",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/snkrs-loop/queue/issues"
   },
   "homepage": "https://github.com/snkrs-loop/queue#readme",
-  "dependencies": {
+  "devDependencies": {
     "jest": "^26.0.1",
     "jest-extended": "^0.11.5"
   }
