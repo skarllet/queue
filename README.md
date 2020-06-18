@@ -4,8 +4,15 @@
 This module is destinated to queue the events of the bot;
 
 ## Install the module
+To use the module you need an ``` .npmrc ``` file with the following instructions:
 ```
-// Add install instructions
+@snkrs-loop:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=[YOUR_TOKEN]
+```
+
+After you configure your ``` .npmrc ```, you may want to instal the packadge:
+```
+npm install @snkrs-loop/queue
 ```
 
 ## Usage
