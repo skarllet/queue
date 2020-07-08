@@ -1,4 +1,4 @@
-![Node.js Package](https://github.com/snkrs-loop/queue/workflows/Node.js%20Package/badge.svg)
+![Node.js Package](https://github.com/skarllet/queue/workflows/Node.js%20Package/badge.svg)
 
 # Queue
 This module is destinated to queue the events of the bot;
@@ -6,19 +6,19 @@ This module is destinated to queue the events of the bot;
 ## Install the module
 To use the module you need an ``` .npmrc ``` file with the following instructions:
 ```
-@snkrs-loop:registry=https://npm.pkg.github.com
+@skarllet:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=[YOUR_TOKEN]
 ```
 
 After you configure your ``` .npmrc ```, you may want to install the packadge:
 ```
-npm install @snkrs-loop/queue
+npm install @skarllet/queue
 ```
 
 ## Usage
 ```
 // To use the module inside node JS
-const Queue = require('@snkrs-loop/queue')
+const Queue = require('@skarllet/queue')
 
 // Create a Queue
 
