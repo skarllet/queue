@@ -30,13 +30,9 @@ describe('Checks the funcionality of the "create" function', () => {
       'event:foo': mockEventHandler,
     }
 
-    const context = {
-      foo: 'bar'
-    }
-
     const params = [ 'foo', 'bar' ]
 
-    const q = Queue.create(events, context);
+    const q = Queue.create(events);
 
     q.push('event:foo', params);
 
@@ -46,8 +42,8 @@ describe('Checks the funcionality of the "create" function', () => {
       expect(mockEventHandler.mock.calls.length).toBe(1);
     });
 
-    test('the event handler should recieve 2 arguments', () => {
-      expect(mockEventHandler.mock.calls[0].length).toBe(2);
+    test('the event handler should recieve 1 arguments', () => {
+      expect(mockEventHandler.mock.calls[0].length).toBe(1);
     });
 
 
@@ -58,19 +54,6 @@ describe('Checks the funcionality of the "create" function', () => {
       test('it should be an object', () => {
         expect(typeof firstArgument).toBe('object');
       });
-      test('it shold match the object passed as second argument in the Queue.create function', () => {
-        expect(firstArgument).toEqual(context);
-      })
-    });
-
-    describe('Tests the second argument recieved by the event handler', () => {
-      const secondArgument = mockEventHandler.mock.calls[0][1];
-      test('it should be an array', () => {
-        expect(Array.isArray(secondArgument)).toBeTruthy();
-      });
-      test('it shold match the object passed as second argument in the q.push function', () => {
-        expect(secondArgument).toEqual(params);
-      })
     });
   })
 

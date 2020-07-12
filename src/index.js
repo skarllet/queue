@@ -1,12 +1,18 @@
+const clearArray = array => {
+  while (array.length) {
+    array.pop();
+  }
+}
+
 module.exports = {
-  create: (events = [], context = {}) => {
+  create: (events = {}) => {
     const queue = [];
 
     const next = () => {
       if (!queue.length) return // ends the loop
 
       const { event, params } = queue.shift() // { event, params }
-      const current = events[event](context, params)
+      const current = events[event](params)
 
       current.then(() => next())
     }
@@ -15,6 +21,8 @@ module.exports = {
 
     const start = () => next()
 
-    return { push, start }
+    const clear = () => clearArray(queue)
+
+    return { push, start, clear }
   }
 }
