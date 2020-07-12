@@ -1,6 +1,6 @@
 {
   "name": "@skarllet/queue",
-  "version": "0.0.3",
+  "version": "1.0.0-beta",
   "description": "",
   "main": "./src/index.js",
   "scripts": {
