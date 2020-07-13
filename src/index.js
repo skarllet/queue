@@ -5,8 +5,9 @@ const clearArray = array => {
 }
 
 module.exports = {
-  create: (events = {}) => {
-    const queue = [];
+  create: () => {
+    const events = {}
+    const queue = []
 
     const next = () => {
       if (!queue.length) return // ends the loop
@@ -23,6 +24,8 @@ module.exports = {
 
     const clear = () => clearArray(queue)
 
-    return { push, start, clear }
+    const register = object => Object.entries(object).map(([key, value]) => events[key] = value)
+
+    return { push, start, clear, register }
   }
 }

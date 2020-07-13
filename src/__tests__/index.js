@@ -21,6 +21,8 @@ describe('Checks the funcionality of the "create" function', () => {
 
     expect(q).toHaveProperty('push');
     expect(q).toHaveProperty('start');
+    expect(q).toHaveProperty('clear');
+    expect(q).toHaveProperty('register');
   });
 
   describe('Tests the call of an event handler in the Queue passed by the events param', () => {
@@ -32,7 +34,9 @@ describe('Checks the funcionality of the "create" function', () => {
 
     const params = [ 'foo', 'bar' ]
 
-    const q = Queue.create(events);
+    const q = Queue.create()
+
+    q.register(events)
 
     q.push('event:foo', params);
 
@@ -64,7 +68,9 @@ describe('Checks the funcionality of the "create" function', () => {
       'event:baz': jest.fn(async () => {}),
     }
 
-    const q = Queue.create(events);
+    const q = Queue.create();
+
+    q.register(events);
 
     q.push('event:foo');
     q.push('event:bar');
