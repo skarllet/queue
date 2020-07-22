@@ -1,3 +1,5 @@
+const e = require('@skarllet/events')
+
 const clearArray = array => {
   while (array.length) {
     array.pop();
@@ -6,6 +8,8 @@ const clearArray = array => {
 
 module.exports = {
   create: () => {
+    const { emmit, on } = e.create()
+
     const events = {}
     const queue = []
 
@@ -14,6 +18,8 @@ module.exports = {
 
       const { event, params } = queue.shift() // { event, params }
       const current = events[event](params)
+
+      emmit('next', { event, params })
 
       current.then(() => next())
     }
@@ -27,6 +33,7 @@ module.exports = {
     const register = object => Object.entries(object).map(([key, value]) => events[key] = value)
 
     return {
+      on,
       push,
       start,
       clear,

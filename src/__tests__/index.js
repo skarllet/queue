@@ -1,25 +1,26 @@
-const Queue = require('../index');
+const queue = require('../index');
 
 describe('Checks the return of the module', () => {
   test('The Query object should have a "create" property', () => {
-    expect(Queue).toHaveProperty('create');
+    expect(queue).toHaveProperty('create');
   });
 
   test('The "create" property should be an function', () => {
-    expect(typeof Queue.create).toBe('function');
+    expect(typeof queue.create).toBe('function');
   });
 })
 
 describe('Queue', () => {
   test('The `create` function should return an Object', () => {
-    const q = Queue.create();
+    const q = queue.create();
     expect(typeof q).toBe('object')
   });
 
-  test('The object should have the properties: push, start, clear, register, events and current', () => {
-    const q = Queue.create();
+  test('The object should have the properties: on, push, start, clear, register, events and current', () => {
+    const q = queue.create();
 
     // Expose the functionality api
+    expect(q).toHaveProperty('on');
     expect(q).toHaveProperty('push');
     expect(q).toHaveProperty('start');
     expect(q).toHaveProperty('clear');
@@ -39,7 +40,7 @@ describe('Queue', () => {
 
     const params = [ 'foo', 'bar' ]
 
-    const q = Queue.create()
+    const q = queue.create()
 
     q.register(events)
 
@@ -73,7 +74,7 @@ describe('Queue', () => {
       'event:baz': jest.fn(async () => {}),
     }
 
-    const q = Queue.create();
+    const q = queue.create();
 
     q.register(events);
 
@@ -102,7 +103,7 @@ describe('Queue', () => {
   describe('Tests the `current` property', () => {
     test('The `current` property should have a length of 3', () => {
 
-      const q = Queue.create();
+      const q = queue.create();
 
       q.register({});
 
@@ -114,7 +115,7 @@ describe('Queue', () => {
     })
 
     test('The first item of the `current` property should be an object with the properties: `event` and `params`', () => {
-      const q = Queue.create();
+      const q = queue.create();
 
       q.register({});
 
@@ -130,7 +131,7 @@ describe('Queue', () => {
     })
 
     test('The`current` should be immutable', () => {
-      const q = Queue.create();
+      const q = queue.create();
 
       q.register({});
 
@@ -143,6 +144,26 @@ describe('Queue', () => {
       q.current[1] = 'hey im trying to change the array 🤭'
 
       expect(q.current).toEqual(snapshot)
+    })
+  })
+
+  describe('Tests the `on` property', () => {
+    test('Should emmit an event `next`', done => {
+      const q = queue.create();
+      const eventName = 'event:foo';
+
+      q.on('next', ({ payload: { event } }) => {
+        expect(event).toMatch(eventName)
+        done()
+      })
+
+      q.register({
+        [eventName]: async () => {},
+      })
+
+      q.push(eventName, {})
+
+      q.start()
     })
   })
 })
