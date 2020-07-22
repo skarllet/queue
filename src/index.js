@@ -26,6 +26,19 @@ module.exports = {
 
     const register = object => Object.entries(object).map(([key, value]) => events[key] = value)
 
-    return { push, start, clear, register }
+    return {
+      push,
+      start,
+      clear,
+      register,
+
+      get current() {
+        return [ ...queue ]
+      },
+
+      get events() {
+        return { ...events }
+      }
+    }
   }
 }

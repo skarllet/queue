@@ -10,19 +10,24 @@ describe('Checks the return of the module', () => {
   });
 })
 
-describe('Checks the funcionality of the "create" function', () => {
-  test('The create function should return an Object', () => {
+describe('Queue', () => {
+  test('The `create` function should return an Object', () => {
     const q = Queue.create();
     expect(typeof q).toBe('object')
   });
 
-  test('The object should have the properties: push and start', () => {
+  test('The object should have the properties: push, start, clear, register, events and current', () => {
     const q = Queue.create();
 
+    // Expose the functionality api
     expect(q).toHaveProperty('push');
     expect(q).toHaveProperty('start');
     expect(q).toHaveProperty('clear');
     expect(q).toHaveProperty('register');
+
+    // Expose the events and current queue order
+    expect(q).toHaveProperty('events');
+    expect(q).toHaveProperty('current');
   });
 
   describe('Tests the call of an event handler in the Queue passed by the events param', () => {
@@ -92,5 +97,52 @@ describe('Checks the funcionality of the "create" function', () => {
     test('the event handler of the event "event:foo" should be called before "event:bar"', () => {
       expect(events['event:foo']).toHaveBeenCalledBefore(events['event:bar']);
     });
+  })
+
+  describe('Tests the `current` property', () => {
+    test('The `current` property should have a length of 3', () => {
+
+      const q = Queue.create();
+
+      q.register({});
+
+      q.push('event:foo');
+      q.push('event:bar');
+      q.push('event:baz');
+
+      expect(q.current.length).toBe(3)
+    })
+
+    test('The first item of the `current` property should be an object with the properties: `event` and `params`', () => {
+      const q = Queue.create();
+
+      q.register({});
+
+      q.push('event:foo', {});
+
+      const item = q.current[0]
+
+      expect(typeof item).toBe('object')
+      expect(Array.isArray(item)).toBe(false)
+
+      expect(item).toHaveProperty('event')
+      expect(item).toHaveProperty('params')
+    })
+
+    test('The`current` should be immutable', () => {
+      const q = Queue.create();
+
+      q.register({});
+
+      q.push('event:foo', {});
+
+      // Create a snapshot of the array to compare later
+      const snapshot = [ ...q.current ]
+
+      // Try to modify the array
+      q.current[1] = 'hey im trying to change the array 🤭'
+
+      expect(q.current).toEqual(snapshot)
+    })
   })
 })
