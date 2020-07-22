@@ -1,6 +1,6 @@
 {
   "name": "@skarllet/queue",
-  "version": "1.0.0-beta.1",
+  "version": "1.1.0",
   "description": "",
   "main": "./src/index.js",
   "scripts": {
@@ -11,7 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/skarllet/queue.git"
   },
-  "keywords": ["query", "events", "async", "queue", "simple", "easy"],
+  "keywords": [
+    "query",
+    "events",
+    "async",
+    "queue",
+    "simple",
+    "easy"
+  ],
   "author": "João Vitor Scheuermann",
   "license": "ISC",
   "bugs": {
