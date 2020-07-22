@@ -4,40 +4,32 @@
 This module is destinated to queue the events of the bot;
 
 ## Install the module
-To use the module you need an ``` .npmrc ``` file with the following instructions:
-```
-@skarllet:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=[YOUR_TOKEN]
-```
 
-After you configure your ``` .npmrc ```, you may want to install the packadge:
+### Instalation
 ```
 npm install @skarllet/queue
 ```
 
-## Usage
+### Usage
 ```
-// To use the module inside node JS
-const Queue = require('@skarllet/queue')
+// To use the module inside Node JS
+const queue = require('@skarllet/queue')
 
-// Create a Queue
+// Create a queue instance
+const q = queue.create();
 
-// Events are the functions that should be called in the order specified
-const events = {
-  'event:foo': async (context, params) => { /* do something boty*/ },
-}
+// Register some events
+q.register({
+  'event:foo': async ({ text }) => {
+    console.log(text) // prints foo
 
-// This context object is passed to all event callbacks (aka: event handlers)
-const context = {
-  foo: 'bar'
-}
-
-// The Queue itself recieve the events and the context
-const q = Queue.create(events, context);
+    /* do something async*/
+  },
+})
 
 // push an event and its parameters that will passed down to the event handler
-q.push('event:foo', [ 'foo', 'bar' ]);
+q.push('event:foo', { text: 'foo' })
 
 // Start the execution
-q.start();
+q.start()
 ```

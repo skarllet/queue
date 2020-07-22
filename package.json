@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/skarllet/queue.git"
   },
-  "keywords": [],
+  "keywords": ["query", "events", "async", "queue", "simple", "easy"],
   "author": "João Vitor Scheuermann",
   "license": "ISC",
   "bugs": {
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/skarllet/queue#readme",
   "devDependencies": {
-    "jest": "^26.0.1",
+    "jest": "^26.1.0",
     "jest-extended": "^0.11.5"
   }
 }
