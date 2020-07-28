@@ -16,12 +16,26 @@ module.exports = {
     const next = () => {
       if (!queue.length) return // ends the loop
 
-      const { event, params } = queue.shift() // { event, params }
-      const current = events[event](params)
+      try {
+        const { event, params } = queue.shift()
 
-      emmit('next', { event, params })
+        emmit('next', { event, params })
 
-      current.then(() => next())
+        const current = events[event]
+
+        if (current === undefined)
+          throw new Error(`Seems like the event '${event}' doesn't exists. Did you register it?`)
+
+        if (typeof current !== 'function' || current.constructor.name !== "AsyncFunction")
+          throw new Error(`Seems like the handler for the event '${event}' it's not a function or a Promise. Did you register it correctly?`)
+
+        current(params)
+          .then(() => next())
+          .catch(error => emmit('error', error))
+
+      } catch (error) {
+        emmit('error', error)
+      }
     }
 
     const push = (event = '', params = null) => queue.push({event, params})
