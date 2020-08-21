@@ -15,9 +15,7 @@
     "query",
     "events",
     "async",
-    "queue",
-    "simple",
-    "easy"
+    "queue"
   ],
   "author": "João Vitor Scheuermann",
   "license": "ISC",
