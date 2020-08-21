@@ -13,21 +13,20 @@ npm install @skarllet/queue
 // To use the module inside Node JS
 const queue = require('@skarllet/queue')
 
-// Create a queue instance
-const q = queue.create();
+// Define a handler
+const handler = item => {
+  console.log(item)
+}
 
-// Register some events
-q.register({
-  'event:foo': async ({ text }) => {
-    console.log(text) // prints foo
+// Create a queue instance and pass the handler to it
+const q = queue.create(handler)
 
-    /* do something async*/
-  },
-})
-
-// push an event and its parameters that will passed down to the event handler
-q.push('event:foo', { text: 'foo' })
+// push an event and its parameters that will passed down to the handler
+q.push({ text: 'foo' })
+q.push({ text: 'bar' })
 
 // Start the execution
 q.start()
+// log: { text: 'foo' }
+// log: { text: 'bar' }
 ```
