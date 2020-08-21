@@ -1,5 +1,3 @@
-![Node.js Package](https://github.com/skarllet/queue/workflows/Node.js%20Package/badge.svg)
-
 # Queue
 This module is destinated to queue events;
 
