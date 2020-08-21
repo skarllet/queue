@@ -14,7 +14,7 @@ module.exports = {
 
     const next = () => {
       if (!queue.length) {
-        emmit('finished')
+        emmit('finish')
         return
       }
 
@@ -23,16 +23,17 @@ module.exports = {
 
         emmit('next', item)
 
-        handler(params)
+        handler(item)
           .then(() => next())
           .catch(error => emmit('error', error))
 
       } catch (error) {
         emmit('error', error)
+        emmit('finish')
       }
     }
 
-    const push = (event = '', payload = null) => queue.push({event, payload})
+    const push = item => queue.push(item)
 
     const start = () => next()
 
